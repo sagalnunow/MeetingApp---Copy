@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WPG_ConferenceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="NumberOfProperties" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="F_Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="L_Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Role_Id" Type="int" />
+    <Property Name="EmployeeStatus" Type="varchar" MaxLength="50" />
+    <Property Name="Manager_Id" Type="int" />
+    <Property Name="Region_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="EmployeeGuest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Employee_Id" Type="int" />
+    <Property Name="Guest_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Guest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="F_Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="L_Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Company_id" Type="int" />
+    <Property Name="Meeting_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Meeting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Start_Time" Type="datetime2" Precision="0" Nullable="false" />
+    <Property Name="End_Time" Type="datetime2" Precision="0" Nullable="false" />
+    <Property Name="Meeting_Date" Type="datetime2" Precision="0" />
+    <Property Name="Date_Scheduled" Type="datetime2" Precision="0" />
+    <Property Name="Topic" Type="varchar" MaxLength="250" />
+    <Property Name="MeetingStatus_id" Type="int" />
+    <Property Name="MeetingType_id" Type="int" />
+    <Property Name="Pause_Start_Time" Type="datetime2" Precision="0" />
+    <Property Name="Pause_End_Time" Type="datetime2" Precision="0" />
+  </EntityType>
+  <EntityType Name="MeetingEmployee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Employee_Id" Type="int" />
+    <Property Name="Meeting_Id" Type="int" />
+    <Property Name="RequirementOption_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="MeetingStatus">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MeetingType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="meeting_type" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Note_Date" Type="datetime2" Precision="0" />
+    <Property Name="Note_Time" Type="datetime2" Precision="0" />
+    <Property Name="NoteType" Type="varchar" MaxLength="50" />
+    <Property Name="Meeting_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="RequirementOption">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsRequired" Type="bit" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'WPG_Conference.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Employee_Guest_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="EmployeeGuest" Type="Self.EmployeeGuest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeGuest">
+        <PropertyRef Name="Employee_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Guest_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="0..1" />
+    <End Role="EmployeeGuest" Type="Self.EmployeeGuest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeGuest">
+        <PropertyRef Name="Guest_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Region">
+    <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Region_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Meeting_Employee_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="MeetingEmployee" Type="Self.MeetingEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeetingEmployee">
+        <PropertyRef Name="Employee_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Meeting_Employee_Meeting">
+    <End Role="Meeting" Type="Self.Meeting" Multiplicity="0..1" />
+    <End Role="MeetingEmployee" Type="Self.MeetingEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meeting">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeetingEmployee">
+        <PropertyRef Name="Meeting_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Meeting_Employee_RequirementOption">
+    <End Role="RequirementOption" Type="Self.RequirementOption" Multiplicity="0..1" />
+    <End Role="MeetingEmployee" Type="Self.MeetingEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RequirementOption">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MeetingEmployee">
+        <PropertyRef Name="RequirementOption_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Employee_tbl_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_guest_tbl_company">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Guest">
+        <PropertyRef Name="Company_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_guest_tbl_meeting">
+    <End Role="Meeting" Type="Self.Meeting" Multiplicity="0..1" />
+    <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meeting">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Guest">
+        <PropertyRef Name="Meeting_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_meeting_tbl_meetingStatus">
+    <End Role="MeetingStatus" Type="Self.MeetingStatus" Multiplicity="0..1" />
+    <End Role="Meeting" Type="Self.Meeting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MeetingStatus">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Meeting">
+        <PropertyRef Name="MeetingStatus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_meeting_tbl_meetingType">
+    <End Role="MeetingType" Type="Self.MeetingType" Multiplicity="0..1" />
+    <End Role="Meeting" Type="Self.Meeting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MeetingType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Meeting">
+        <PropertyRef Name="MeetingType_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_notes_tbl_Meeting">
+    <End Role="Meeting" Type="Self.Meeting" Multiplicity="0..1" />
+    <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meeting">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="Meeting_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WPG_ConferenceModelStoreContainer">
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeGuest" EntityType="Self.EmployeeGuest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Guest" EntityType="Self.Guest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Meeting" EntityType="Self.Meeting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MeetingEmployee" EntityType="Self.MeetingEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MeetingStatus" EntityType="Self.MeetingStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MeetingType" EntityType="Self.MeetingType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequirementOption" EntityType="Self.RequirementOption" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+      <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Employee_Guest_Employee" Association="Self.FK_Employee_Guest_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmployeeGuest" EntitySet="EmployeeGuest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Guest_Guest" Association="Self.FK_Employee_Guest_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="EmployeeGuest" EntitySet="EmployeeGuest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Region" Association="Self.FK_Employee_Region">
+      <End Role="Region" EntitySet="Region" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Meeting_Employee_Employee" Association="Self.FK_Meeting_Employee_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="MeetingEmployee" EntitySet="MeetingEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Meeting_Employee_Meeting" Association="Self.FK_Meeting_Employee_Meeting">
+      <End Role="Meeting" EntitySet="Meeting" />
+      <End Role="MeetingEmployee" EntitySet="MeetingEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Meeting_Employee_RequirementOption" Association="Self.FK_Meeting_Employee_RequirementOption">
+      <End Role="RequirementOption" EntitySet="RequirementOption" />
+      <End Role="MeetingEmployee" EntitySet="MeetingEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Employee_tbl_Roles" Association="Self.FK_tbl_Employee_tbl_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_guest_tbl_company" Association="Self.FK_tbl_guest_tbl_company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Guest" EntitySet="Guest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_guest_tbl_meeting" Association="Self.FK_tbl_guest_tbl_meeting">
+      <End Role="Meeting" EntitySet="Meeting" />
+      <End Role="Guest" EntitySet="Guest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_meeting_tbl_meetingStatus" Association="Self.FK_tbl_meeting_tbl_meetingStatus">
+      <End Role="MeetingStatus" EntitySet="MeetingStatus" />
+      <End Role="Meeting" EntitySet="Meeting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_meeting_tbl_meetingType" Association="Self.FK_tbl_meeting_tbl_meetingType">
+      <End Role="MeetingType" EntitySet="MeetingType" />
+      <End Role="Meeting" EntitySet="Meeting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_notes_tbl_Meeting" Association="Self.FK_tbl_notes_tbl_Meeting">
+      <End Role="Meeting" EntitySet="Meeting" />
+      <End Role="Notes" EntitySet="Notes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

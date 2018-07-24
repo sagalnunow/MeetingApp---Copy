@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - IC-Start Scheduler</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-static-top" style="background-color:lightgray">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-user" style="width: 40px; color: navy"></i></a>
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+        <ul class="nav navbar-nav pull-left">
+            <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home" style="color: navy"></span></a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Schedule <span class="glyphicon glyphicon-calendar"></span></a>
+                <ul class="dropdown-menu" role="menu" id="myTab">
+                    <li><a href="@Url.Action("Index", "Individuals")"><span class="glyphicon glyphicon-user"></span>Individuals</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("Index", "Schedule")"><span class="glyphicon glyphicon-time"></span>Time</a></li>
+                    @if (User.IsInRole("A") || User.IsInRole("BE"))
+                    {
+                        <li class="divider"></li>
+                        <li><a href="@Url.Action("Index", "ScheduleMeeting")"><span class="glyphicon glyphicon-time"></span>ScheduleMeeting</a></li>
+                    }
+                    </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Meeting Notes <span class="glyphicon glyphicon-book"></span></a>
+                <ul class="dropdown-menu" role="menu" id="myTab">
+                    <li><a href="@Url.Action("Index", "Takenote")"><span class="glyphicon glyphicon-book"></span>Take note</a></li>
+                    <li class="divider"></li>
+                    <li role="presentation"><a href="@Url.Action("Index", "Notes", new { noteType = "Pre-Note" })" aria-controls="training"><span class="glyphicon glyphicon-book"></span>Pre-note</a></li>
+                    <li class="divider"></li>
+                    <li role="presentation"><a href="@Url.Action("Index", "Notes", new { noteType = "Post-Note" })" aria-controls="website"><span class="glyphicon glyphicon-book"></span>Post-note</a></li>
+                   
+                </ul>
+            </li>
+            <li><a href="@Url.Action("Index", "Reports")">Report <span class="glyphicon glyphicon-flag" style="color: blue"></span></a></li>
+
+            @if (User.IsInRole("BE"))
+            {
+                <li><a href="@Url.Action("Index", "Employees")">Change Password <span class="glyphicon glyphicon-lock" style="color: blue"></span></a></li>
+               
+            }
+
+            @if (User.IsInRole("A") || User.IsInRole("BE"))
+            {
+                <li><a href="@Url.Action("Index","Guest")">Check In  <span class="glyphicon glyphicon-check" style="color: blue"></span></a></li>
+
+            }
+
+
+
+        </ul>
+        <form action="/EmployeeGuests/Search" class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="Search" />
+            </div>
+            <button class="btn btn-sm"><i class="glyphicon glyphicon-search"></i></button>
+        </form>
+        }
+        <ul class="nav navbar-nav pull-right">
+
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="pull-right">@Html.ActionLink("LogOut", "LogOut", "Security")</li>
+                <li class="noti glyphicon glyphicon-bell"><span class="count">&nbsp;</span></li>
+                @*<li class="pull-right"><a href="#"><b>Welcome</b> @User.Identity.Name</a></li>*@
+            }
+            else
+            {
+                <li>@Html.ActionLink("Login", "Login", "Security")</li>
+            }
+
+
+        </ul>
+        
+
+
+    </nav>
+    
+
+    <div class="container-fluid body-content" style="margin-top: 20px;">
+        @RenderBody()
+        <hr />
+    </div>
+    <footer class="container-fluid" style="background-color:navy;color:white;margin-bottom:0px">
+
+        <div style="height: 40px; text-align: center">
+            <div class="col-md-12">
+                <p>&copy; @DateTime.Now.Year - Meeting Scheduling System</p>
+            </div>
+
+            <div style="clear:both"></div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", false)
+</body>
+</html>
